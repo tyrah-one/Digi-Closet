@@ -1,0 +1,357 @@
+/* ---------- Basics ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: system-ui, -apple-system, 'Segoe UI', Roboto, sans-serif;
+  color: #222;
+  background: #fafafa;
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 24px 16px 48px;
+}
+
+h1 {
+  margin-top: 0;
+}
+
+a {
+  color: #b5367a;
+}
+
+.muted {
+  color: #777;
+}
+
+button {
+  font: inherit;
+  padding: 8px 16px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+  background: #fff;
+  cursor: pointer;
+}
+
+button:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+}
+
+button.primary {
+  background: #b5367a;
+  border-color: #b5367a;
+  color: #fff;
+}
+
+button.danger {
+  color: #c62828;
+  border-color: #c62828;
+}
+
+/* ---------- Navigation bar ---------- */
+.nav {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 24px;
+  padding: 12px 16px;
+  background: #fff;
+  border-bottom: 1px solid #e5e5e5;
+}
+
+.nav a {
+  color: #444;
+  text-decoration: none;
+}
+
+.nav nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 16px;
+}
+
+.nav a.active {
+  color: #b5367a;
+  font-weight: 600;
+}
+
+.nav .logo {
+  font-size: 1.3rem;
+  font-weight: 700;
+  color: #b5367a;
+}
+
+/* ---------- Home page ---------- */
+.home-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 16px;
+  margin-top: 24px;
+}
+
+.card-link {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 20px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+  color: inherit;
+  text-decoration: none;
+}
+
+.card-link:hover {
+  border-color: #b5367a;
+}
+
+.card-link span {
+  color: #777;
+}
+
+/* ---------- Shared page pieces ---------- */
+.page-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+}
+
+.empty {
+  padding: 32px;
+  text-align: center;
+  background: #fff;
+  border: 1px dashed #ccc;
+  border-radius: 10px;
+}
+
+.delete-badge {
+  position: absolute;
+  top: -10px;
+  right: -10px;
+  width: 30px;
+  height: 30px;
+  padding: 0;
+  border-radius: 50%;
+  border-color: #c62828;
+  background: #c62828;
+  color: #fff;
+}
+
+/* ---------- Clothing page ---------- */
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(150px, 1fr));
+  gap: 16px;
+}
+
+.piece {
+  position: relative;
+  margin: 0;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+}
+
+.piece img {
+  width: 100%;
+  aspect-ratio: 1;
+  object-fit: contain;
+}
+
+.piece figcaption {
+  font-size: 0.9rem;
+  text-align: center;
+}
+
+/* ---------- Upload page ---------- */
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 16px;
+  max-width: 400px;
+}
+
+.upload-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+}
+
+.upload-form input[type='text'],
+.upload-form select {
+  font: inherit;
+  padding: 8px;
+  border: 1px solid #ccc;
+  border-radius: 6px;
+}
+
+.photo-drop {
+  align-items: center;
+  justify-content: center;
+  height: 300px;
+  background: #fff;
+  border: 2px dashed #ccc;
+  border-radius: 10px;
+  cursor: pointer;
+  color: #777;
+}
+
+.photo-drop img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.photo-drop input {
+  display: none;
+}
+
+.button-row {
+  display: flex;
+  gap: 8px;
+}
+
+.message {
+  margin: 0;
+  color: #2e7d32;
+}
+
+/* ---------- Mix & Match page ---------- */
+.mix-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 32px;
+  align-items: flex-start;
+}
+
+.slots {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 380px;
+}
+
+.slot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+.slot > button {
+  height: 60px;
+}
+
+.slot-window {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 180px;
+  padding: 8px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+}
+
+.slot-window img {
+  flex: 1;
+  min-height: 0;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.slot-label {
+  font-size: 0.85rem;
+  color: #555;
+}
+
+.save-outfit {
+  padding: 12px;
+}
+
+.saved-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  width: 280px;
+}
+
+.saved-preview h2 {
+  margin: 0;
+}
+
+/* ---------- Collage (used on Mix & Match and Saved Outfits) ---------- */
+.collage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: #f3ece2;
+  border-radius: 6px;
+  overflow: hidden;
+}
+
+.collage img {
+  position: absolute;
+  width: 58%;
+  padding: 6px;
+  background: #fff;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.2);
+  object-fit: contain;
+  aspect-ratio: 1;
+}
+
+.collage-jacket {
+  top: 6%;
+  left: 4%;
+  transform: rotate(-7deg);
+}
+
+.collage-top {
+  top: 10%;
+  right: 4%;
+  transform: rotate(5deg);
+  z-index: 1;
+}
+
+.collage-bottom {
+  bottom: 4%;
+  left: 21%;
+  transform: rotate(-2deg);
+  z-index: 2;
+}
+
+/* Without a jacket, center the top above the bottom */
+.collage.no-jacket .collage-top {
+  right: 21%;
+}
+
+/* ---------- Saved Outfits page ---------- */
+.outfit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 20px;
+}
+
+.outfit-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 10px;
+  background: #fff;
+  border: 1px solid #e5e5e5;
+  border-radius: 10px;
+}
+
+.outfit-card .delete-badge {
+  z-index: 3;
+}
