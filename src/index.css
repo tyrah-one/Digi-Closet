@@ -88,6 +88,10 @@ button.danger {
 }
 
 /* ---------- Home page ---------- */
+.home-intro {
+  text-align: center;
+}
+
 .home-links {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));

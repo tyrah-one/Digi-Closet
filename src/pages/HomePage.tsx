@@ -6,13 +6,13 @@ export default function HomePage() {
 
   return (
     <section className="home">
-      <h1>Welcome to your Digi-Closet</h1>
-      <p>
-        Upload your clothes, then mix and match them to find the ideal outfit.
-      </p>
-      <p className="muted">
-        {items.length} pieces · {outfits.length} saved outfits
-      </p>
+      <div className="home-intro">
+        <h1>DIGI CLOSET</h1>
+        <p>the digital wardrobe and outfit finder &lt;3</p>
+        <p className="muted">
+          {items.length} pieces · {outfits.length} saved outfits
+        </p>
+      </div>
 
       <div className="home-links">
         <Link to="/clothing" className="card-link">
