@@ -90,6 +90,19 @@ button.danger {
 /* ---------- Home page ---------- */
 .home-intro {
   text-align: center;
+  /* Space between the big title and the screen edges */
+  --title-gap: max(24px, 5vw);
+}
+
+/* Big title that stretches almost edge to edge on any screen size.
+   The negative side margins let it grow wider than the page column,
+   and dividing the width by 7 fits the 11 letters of "DIGI CLOSET". */
+.home-intro h1 {
+  margin-inline: calc(50% - 50vw + var(--title-gap));
+  margin-block: 8px 16px; /* fixed spacing, so it doesn't grow with the font */
+  font-size: calc((100vw - 2 * var(--title-gap)) / 7);
+  line-height: 1;
+  white-space: nowrap;
 }
 
 .home-links {
