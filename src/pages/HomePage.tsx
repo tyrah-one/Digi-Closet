@@ -8,7 +8,7 @@ export default function HomePage() {
     <section className="home">
       <div className="home-intro">
         <h1>DIGI CLOSET</h1>
-        <p>the digital wardrobe and outfit finder &lt;3</p>
+        <p className="tagline">the digital wardrobe and outfit finder &lt;3</p>
         <p className="muted">
           {items.length} pieces · {outfits.length} saved outfits
         </p>

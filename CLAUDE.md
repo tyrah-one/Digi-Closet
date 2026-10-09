@@ -6,7 +6,8 @@ The owner is a beginner (some Java, a little HTML/CSS). Keep code simple and rea
 
 ## Stack
 - React + TypeScript + Vite, react-router-dom (HashRouter)
-- Plain CSS in `src/index.css` (no CSS framework yet)
+- Plain CSS in `src/index.css` (no CSS framework yet). Minimal black-and-white style: colors and fonts are tokens at the top of the file
+- Fonts from Google Fonts (linked in `index.html`): Bodoni Moda for headings/logo, Jost for everything else
 - Data lives in localStorage via `src/ClosetContext.tsx`. No backend yet; Supabase is the planned next step.
 
 ## Layout

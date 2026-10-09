@@ -10,7 +10,7 @@ export default function App() {
     <>
       <header className="nav">
         <NavLink to="/" className="logo">
-          Digi-Closet
+          Digi Closet
         </NavLink>
         <nav>
           <NavLink to="/clothing">My Clothing</NavLink>
