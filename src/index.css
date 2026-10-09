@@ -355,3 +355,28 @@ button.danger {
 .outfit-card .delete-badge {
   z-index: 3;
 }
+
+/* "Yes, delete / Cancel" box that covers a card while confirming */
+.confirm-box {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 8px;
+  padding: 8px;
+  text-align: center;
+  background: rgba(255, 255, 255, 0.94);
+  border-radius: 10px;
+}
+
+.confirm-box small {
+  color: #777;
+}
+
+.confirm-box .button-row {
+  flex-wrap: wrap;
+  justify-content: center;
+}

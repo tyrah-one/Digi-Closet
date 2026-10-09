@@ -6,15 +6,11 @@ import { CATEGORIES, CATEGORY_LABELS } from '../types'
 export default function ClothingPage() {
   const { items, outfits, deleteItem } = useCloset()
   const [editing, setEditing] = useState(false)
+  // The piece waiting for a "Yes, delete" click
+  const [confirmingId, setConfirmingId] = useState<string | null>(null)
 
-  function handleDelete(id: string, name: string) {
-    const usedIn = outfits.filter(
-      (o) => o.jacketId === id || o.topId === id || o.bottomId === id,
-    ).length
-    const warning = usedIn > 0 ? `\n\nThis will also delete ${usedIn} saved outfit(s) that use it.` : ''
-    if (confirm(`Delete "${name}" from your closet?${warning}`)) {
-      deleteItem(id)
-    }
+  function outfitsUsing(id: string) {
+    return outfits.filter((o) => o.jacketId === id || o.topId === id || o.bottomId === id).length
   }
 
   return (
@@ -22,7 +18,14 @@ export default function ClothingPage() {
       <div className="page-header">
         <h1>My Clothing</h1>
         {items.length > 0 && (
-          <button onClick={() => setEditing(!editing)}>{editing ? 'Done' : 'Edit'}</button>
+          <button
+            onClick={() => {
+              setEditing(!editing)
+              setConfirmingId(null)
+            }}
+          >
+            {editing ? 'Done' : 'Edit'}
+          </button>
         )}
       </div>
 
@@ -44,14 +47,28 @@ export default function ClothingPage() {
                 <figure key={item.id} className="piece">
                   <img src={item.image} alt={item.name} />
                   <figcaption>{item.name}</figcaption>
-                  {editing && (
+                  {editing && confirmingId !== item.id && (
                     <button
                       className="delete-badge"
                       aria-label={`Delete ${item.name}`}
-                      onClick={() => handleDelete(item.id, item.name)}
+                      onClick={() => setConfirmingId(item.id)}
                     >
                       ✕
                     </button>
+                  )}
+                  {confirmingId === item.id && (
+                    <div className="confirm-box">
+                      <span>Delete this piece?</span>
+                      {outfitsUsing(item.id) > 0 && (
+                        <small>Also deletes {outfitsUsing(item.id)} outfit(s) using it.</small>
+                      )}
+                      <div className="button-row">
+                        <button className="danger" onClick={() => deleteItem(item.id)}>
+                          Yes, delete
+                        </button>
+                        <button onClick={() => setConfirmingId(null)}>Cancel</button>
+                      </div>
+                    </div>
                   )}
                 </figure>
               ))}

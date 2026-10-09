@@ -6,13 +6,22 @@ import OutfitCollage from '../components/OutfitCollage'
 export default function OutfitsPage() {
   const { outfits, deleteOutfit } = useCloset()
   const [editing, setEditing] = useState(false)
+  // The outfit waiting for a "Yes, delete" click
+  const [confirmingId, setConfirmingId] = useState<string | null>(null)
 
   return (
     <section>
       <div className="page-header">
         <h1>Saved Outfits</h1>
         {outfits.length > 0 && (
-          <button onClick={() => setEditing(!editing)}>{editing ? 'Done' : 'Edit'}</button>
+          <button
+            onClick={() => {
+              setEditing(!editing)
+              setConfirmingId(null)
+            }}
+          >
+            {editing ? 'Done' : 'Edit'}
+          </button>
         )}
       </div>
 
@@ -27,14 +36,25 @@ export default function OutfitsPage() {
           <div key={outfit.id} className="outfit-card">
             <OutfitCollage outfit={outfit} />
             <span className="muted">{new Date(outfit.createdAt).toLocaleDateString()}</span>
-            {editing && (
+            {editing && confirmingId !== outfit.id && (
               <button
                 className="delete-badge"
                 aria-label="Delete outfit"
-                onClick={() => confirm('Delete this outfit?') && deleteOutfit(outfit.id)}
+                onClick={() => setConfirmingId(outfit.id)}
               >
                 ✕
               </button>
+            )}
+            {confirmingId === outfit.id && (
+              <div className="confirm-box">
+                <span>Delete this outfit?</span>
+                <div className="button-row">
+                  <button className="danger" onClick={() => deleteOutfit(outfit.id)}>
+                    Yes, delete
+                  </button>
+                  <button onClick={() => setConfirmingId(null)}>Cancel</button>
+                </div>
+              </div>
             )}
           </div>
         ))}
