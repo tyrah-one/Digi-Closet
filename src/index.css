@@ -11,6 +11,7 @@
 
   --serif: 'Bodoni Moda', 'Didot', 'Bodoni 72', Georgia, serif;
   --sans: 'Jost', 'Futura', 'Century Gothic', system-ui, sans-serif;
+  --display: 'Archivo Black', 'Arial Black', Impact, sans-serif; /* big home title only */
 }
 
 /* ---------- Basics ---------- */
@@ -171,11 +172,12 @@ button.danger:hover:not(:disabled) {
 
 /* Big title that stretches almost edge to edge on any screen size.
    The negative side margins let it grow wider than the page column,
-   and dividing the width by 6.2 fits "DIGI CLOSET" in this font. */
+   and dividing the width by 7.2 fits "DIGI CLOSET" in Archivo Black. */
 .home-intro h1 {
   margin-inline: calc(50% - 50vw + var(--title-gap));
   margin-block: 8px 20px; /* fixed spacing, so it doesn't grow with the font */
-  font-size: calc((100vw - 2 * var(--title-gap)) / 6.2);
+  font-family: var(--display);
+  font-size: calc((100vw - 2 * var(--title-gap)) / 7.2);
   line-height: 1;
   white-space: nowrap;
 }
