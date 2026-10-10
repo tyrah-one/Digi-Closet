@@ -41,7 +41,7 @@ export default function ClothingPage() {
 
         return (
           <div key={category}>
-            <h2>{CATEGORY_LABELS[category]}</h2>
+            <h2 className={`category-heading ${category}`}>{CATEGORY_LABELS[category]}</h2>
             <div className="grid">
               {piecesInCategory.map((item) => (
                 <figure key={item.id} className="piece">

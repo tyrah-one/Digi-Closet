@@ -1,13 +1,33 @@
-/* Minimal, chic look: black on soft white, thin lines, square corners,
-   a fashion-magazine serif for headings and a clean sans for everything else. */
+/* Minimal, chic look: thin lines, square corners,
+   a fashion-magazine serif for headings and a clean sans for everything else.
+
+   Colours come from the owner's Resene colour palette.
+   The two biggest colours (Kina Brown, Half Alabaster) do most of the work;
+   the smaller ones are used as accents, roughly in the palette's proportions. */
 :root {
-  --paper: #fbfbf9; /* page background */
-  --white: #ffffff; /* cards and photo frames */
-  --ink: #111111; /* main text and buttons */
-  --grey: #8a8a86; /* quiet text */
-  --line: #e4e3df; /* thin borders */
-  --board: #f0eee9; /* collage background */
-  --danger: #a61b1b; /* delete actions only */
+  /* The palette */
+  --kina-brown: #413b38; /* 30% */
+  --half-alabaster: #fdfdfc; /* 30% */
+  --kensington-grey: #9c9e98; /* 9% */
+  --swiss-caramel: #ac7548; /* 5% */
+  --weathered-yellow: #e4daa2; /* 5% */
+  --wimbledon: #4f6f37; /* 4% */
+  --burgundy: #6c2b2b; /* 4% */
+  --mantis: #88bf4d; /* 2% */
+  --bright-red: #81161a; /* 2% */
+  --lemon-ginger: #978732; /* 2% */
+
+  /* What each colour is used for */
+  --paper: var(--half-alabaster); /* page background */
+  --white: #ffffff; /* photo frames, so clothes look true to colour */
+  --ink: var(--kina-brown); /* main text, buttons, title */
+  --grey: color-mix(in srgb, var(--kina-brown) 70%, var(--half-alabaster)); /* quiet text */
+  --line: color-mix(in srgb, var(--kensington-grey) 45%, var(--half-alabaster)); /* thin borders */
+  --accent: var(--swiss-caramel); /* active page underline, hovers */
+  --highlight: color-mix(in srgb, var(--weathered-yellow) 35%, var(--half-alabaster)); /* soft hover fill */
+  --board: color-mix(in srgb, var(--weathered-yellow) 45%, var(--half-alabaster)); /* collage background */
+  --success: var(--wimbledon); /* "Saved!" messages */
+  --danger: var(--bright-red); /* delete actions only */
 
   --serif: 'Bodoni Moda', 'Didot', 'Bodoni 72', Georgia, serif;
   --sans: 'Jost', 'Futura', 'Century Gothic', system-ui, sans-serif;
@@ -106,7 +126,8 @@ button.primary {
 }
 
 button.primary:hover:not(:disabled) {
-  background: #333;
+  background: var(--accent);
+  border-color: var(--accent);
 }
 
 button.danger {
@@ -154,7 +175,7 @@ button.danger:hover:not(:disabled) {
 
 .nav nav a:hover,
 .nav nav a.active {
-  border-bottom-color: var(--ink);
+  border-bottom-color: var(--accent);
 }
 
 .nav .logo {
@@ -218,7 +239,7 @@ button.danger:hover:not(:disabled) {
 }
 
 .card-link:hover {
-  background: var(--white);
+  background: var(--highlight);
 }
 
 .card-link strong {
@@ -261,6 +282,31 @@ button.danger:hover:not(:disabled) {
 }
 
 /* ---------- Clothing page ---------- */
+/* Each category heading gets a small swatch from the palette */
+.category-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.category-heading::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+}
+
+.category-heading.jacket::before {
+  background: var(--burgundy);
+}
+
+.category-heading.top::before {
+  background: var(--mantis);
+}
+
+.category-heading.bottom::before {
+  background: var(--lemon-ginger);
+}
+
 .grid {
   display: grid;
   grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
@@ -352,6 +398,7 @@ button.danger:hover:not(:disabled) {
 .message {
   margin: 0;
   font-size: 0.9rem;
+  color: var(--success);
 }
 
 /* ---------- Mix & Match page ---------- */
@@ -425,6 +472,7 @@ button.danger:hover:not(:disabled) {
 
 .saved-preview h2 {
   margin: 0;
+  color: var(--success);
 }
 
 /* ---------- Collage (used on Mix & Match and Saved Outfits) ---------- */
@@ -441,7 +489,7 @@ button.danger:hover:not(:disabled) {
   width: 58%;
   padding: 6px;
   background: var(--white);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.12);
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--ink) 20%, transparent);
   object-fit: contain;
   aspect-ratio: 1;
 }
@@ -506,7 +554,7 @@ button.danger:hover:not(:disabled) {
   gap: 10px;
   padding: 8px;
   text-align: center;
-  background: rgba(251, 251, 249, 0.95);
+  background: color-mix(in srgb, var(--paper) 95%, transparent);
   border: 1px solid var(--ink);
 }
 
