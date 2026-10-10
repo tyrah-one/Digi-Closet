@@ -13,11 +13,11 @@ Your content is in the first `<script>` block at the top of `index.html`:
 Each project opens at `index.html#project/<id>`.
 
 Drop images into `images/` and reference them, e.g. `cover: "images/atelier-cover.jpg"`
-(or use a full `https://...` image URL). Leave `cover` / `src` empty to show a colored placeholder
-in the project's `tone`. Set `featured: true` on the project you want as the cover story.
+(or use a full `https://...` image URL). Leave `cover` / `src` empty to show an outlined placeholder.
+Images are shown in black & white; delete `filter: grayscale(1)` in the `<style>` block to show them in colour. Set `featured: true` on the project you want as the cover story.
 
 ## Changing the look
-Colors and fonts are CSS variables at the top of the `<style>` block in `index.html`.
+The black & white palette and fonts are CSS variables at the top of the `<style>` block in `index.html`.
 
 ## Publishing
 Any static host works (GitHub Pages, Netlify, Vercel). For GitHub Pages, serve the `portfolio/` folder.

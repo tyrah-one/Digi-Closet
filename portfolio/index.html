@@ -26,8 +26,7 @@
          client    – company / course / "Personal project"
          tools     – array of tools, e.g. ["Figma", "Maze"]
          cover     – path to a cover image, e.g. "images/fintech-cover.jpg"
-                     (leave "" to use the colored placeholder)
-         tone      – fallback cover color when there is no image
+                     (leave "" to show an outlined placeholder)
          featured  – true puts this project on the "cover story" spot (use one)
          blurb     – 1–3 sentences shown on the cards on the home page
          story     – the full write-up; one string per paragraph.
@@ -66,7 +65,6 @@
         client: "Personal project",
         tools: ["Figma", "FigJam", "Maze", "Protopie"],
         cover: "",
-        tone: "#c9a69a",
         featured: true,
         blurb:
           "A wardrobe companion app that helps users mix and match the pieces they already own. I led research, information architecture and the visual system.",
@@ -95,7 +93,6 @@
         client: "Client name",
         tools: ["Figma", "Notion", "Hotjar"],
         cover: "",
-        tone: "#8f9a7a",
         blurb:
           "Simplified a cluttered reporting tool into a focused dashboard, cutting time-to-insight for co-op managers in usability tests.",
         pullQuote: "Less data on screen, more decisions made.",
@@ -118,7 +115,6 @@
         client: "Client name",
         tools: ["Figma", "Storybook", "Tokens Studio"],
         cover: "",
-        tone: "#2f2a28",
         blurb:
           "Components, tokens and documentation that brought consistency across three products and sped up handoff to engineering.",
         pullQuote: "A system is only as good as the people who adopt it.",
@@ -136,7 +132,6 @@
         client: "Course / bootcamp",
         tools: ["Figma", "Dovetail", "Optimal Workshop"],
         cover: "",
-        tone: "#b8735a",
         blurb:
           "Interviews and card sorting with caregivers revealed where booking broke down; the redesign focused on shared calendars and reminders.",
         pullQuote: "",
@@ -152,15 +147,11 @@
   <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
   <style>
     /* ==========================================================================
-       Magazine theme — change the look by editing these variables.
+       Minimal black & white magazine theme.
        ========================================================================== */
     :root {
-      --paper: #f6f1ea;
-      --paper-deep: #ece4d8;
-      --ink: #161413;
-      --ink-soft: #5d5651;
-      --rule: #d8cfc3;
-      --accent: #8c1c24; /* oxblood */
+      --paper: #ffffff;
+      --ink: #000000;
       --serif: "Bodoni Moda", "Didot", "Bodoni 72", Georgia, serif;
       --sans: "Inter", "Helvetica Neue", Arial, sans-serif;
       --max: 1240px;
@@ -178,9 +169,9 @@
       line-height: 1.6;
       -webkit-font-smoothing: antialiased;
     }
-    img { display: block; max-width: 100%; }
+    img { display: block; max-width: 100%; filter: grayscale(1); } /* delete the filter to show images in colour */
     a { color: inherit; text-decoration: none; }
-    ::selection { background: var(--accent); color: var(--paper); }
+    ::selection { background: var(--ink); color: var(--paper); }
 
     .kicker {
       display: inline-block;
@@ -189,9 +180,8 @@
       font-weight: 600;
       letter-spacing: 0.22em;
       text-transform: uppercase;
-      color: var(--ink-soft);
+      color: var(--ink);
     }
-    .kicker--accent { color: var(--accent); }
 
     .read-more {
       font-size: 0.75rem;
@@ -202,7 +192,7 @@
       padding-bottom: 2px;
       transition: color 0.2s;
     }
-    .read-more:hover { color: var(--accent); }
+    .read-more:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.12em; }
 
     /* ---- Masthead ---------------------------------------------------------- */
     .masthead {
@@ -218,14 +208,14 @@
       font-size: 0.68rem;
       letter-spacing: 0.2em;
       text-transform: uppercase;
-      color: var(--ink-soft);
+      color: var(--ink);
       border-bottom: 1px solid var(--ink);
       padding-bottom: 10px;
     }
     .masthead__logo {
       display: block;
       font-family: var(--serif);
-      font-weight: 800;
+      font-weight: 500;
       font-size: clamp(3.4rem, 15vw, 11rem);
       line-height: 0.95;
       letter-spacing: -0.02em;
@@ -237,7 +227,7 @@
       justify-content: center;
       flex-wrap: wrap;
       gap: 8px 36px;
-      border-top: 3px double var(--ink);
+      border-top: 1px solid var(--ink);
       border-bottom: 1px solid var(--ink);
       padding: 12px 0;
       font-size: 0.72rem;
@@ -245,7 +235,7 @@
       letter-spacing: 0.22em;
       text-transform: uppercase;
     }
-    .masthead__nav a:hover { color: var(--accent); }
+    .masthead__nav a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.12em; }
     .masthead--slim .masthead__logo { font-size: clamp(2.4rem, 8vw, 4.5rem); padding-top: 4px; }
 
     /* ---- Placeholder visuals ----------------------------------------------- */
@@ -255,10 +245,9 @@
       min-height: 220px;
       display: grid;
       place-items: center;
-      background:
-        radial-gradient(120% 90% at 20% 10%, rgba(255,255,255,0.28), transparent 60%),
-        var(--tone);
-      color: rgba(255,255,255,0.9);
+      background: var(--paper);
+      border: 1px solid var(--ink);
+      color: var(--ink);
     }
     .placeholder span {
       font-family: var(--serif);
@@ -289,7 +278,7 @@
     }
     .cover__intro {
       font-size: 1.05rem;
-      color: var(--ink-soft);
+      color: var(--ink);
       max-width: 34em;
       margin: 0 0 36px;
     }
@@ -302,12 +291,12 @@
     .cover__story-title {
       font-family: var(--serif);
       font-size: clamp(1.8rem, 3vw, 2.4rem);
-      font-weight: 700;
+      font-weight: 500;
       line-height: 1.1;
     }
-    .cover__story-dek { font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--ink-soft); margin-bottom: 10px; }
+    .cover__story-dek { font-family: var(--serif); font-style: italic; font-size: 1.15rem; color: var(--ink); margin-bottom: 10px; }
     .cover__story .read-more { justify-self: start; }
-    .cover__story:hover .cover__story-title { color: var(--accent); }
+    .cover__story:hover .cover__story-title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.12em; }
 
     .cover__image {
       position: relative;
@@ -327,7 +316,8 @@
       position: absolute;
       left: 0;
       bottom: 0;
-      background: var(--paper);
+      background: var(--ink);
+      color: var(--paper);
       padding: 10px 16px;
       font-size: 0.68rem;
       font-weight: 600;
@@ -345,7 +335,7 @@
       display: flex;
       align-items: baseline;
       justify-content: space-between;
-      border-top: 3px double var(--ink);
+      border-top: 1px solid var(--ink);
       border-bottom: 1px solid var(--ink);
       padding: 14px 0;
       margin-bottom: 8px;
@@ -353,13 +343,13 @@
     .section-head h2 {
       margin: 0;
       font-family: var(--serif);
-      font-weight: 600;
+      font-weight: 400;
       font-style: italic;
       font-size: clamp(1.6rem, 3vw, 2.4rem);
     }
 
     .toc { list-style: none; margin: 0 0 56px; padding: 0; columns: 2; column-gap: 48px; }
-    .toc li { break-inside: avoid; border-bottom: 1px solid var(--rule); }
+    .toc li { break-inside: avoid; border-bottom: 1px solid var(--ink); }
     .toc a {
       display: grid;
       grid-template-columns: auto 1fr auto;
@@ -367,10 +357,10 @@
       gap: 16px;
       padding: 14px 0;
     }
-    .toc__num { font-family: var(--serif); font-size: 1.4rem; color: var(--accent); }
-    .toc__title { font-family: var(--serif); font-size: 1.3rem; font-weight: 600; }
-    .toc__cat { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink-soft); }
-    .toc a:hover .toc__title { color: var(--accent); }
+    .toc__num { font-family: var(--serif); font-size: 1.4rem; color: var(--ink); }
+    .toc__title { font-family: var(--serif); font-size: 1.3rem; font-weight: 400; }
+    .toc__cat { font-size: 0.68rem; letter-spacing: 0.18em; text-transform: uppercase; color: var(--ink); }
+    .toc a:hover .toc__title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.12em; }
 
     .grid {
       display: grid;
@@ -386,13 +376,13 @@
     .card__title {
       font-family: var(--serif);
       font-size: clamp(1.8rem, 3vw, 2.5rem);
-      font-weight: 700;
+      font-weight: 500;
       line-height: 1.05;
       margin: 8px 0 6px;
     }
-    .card__title a:hover { color: var(--accent); }
+    .card__title a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.12em; }
     .card__dek { font-family: var(--serif); font-style: italic; font-size: 1.15rem; margin: 0 0 10px; }
-    .card__blurb { color: var(--ink-soft); margin: 0 0 16px; }
+    .card__blurb { color: var(--ink); margin: 0 0 16px; }
 
     .card--wide {
       grid-column: 1 / -1;
@@ -405,7 +395,7 @@
 
     /* ---- Editor's letter --------------------------------------------------- */
     .letter {
-      background: var(--paper-deep);
+      border-top: 1px solid var(--ink);
       padding: clamp(48px, 8vw, 104px) var(--gutter);
       text-align: center;
     }
@@ -422,11 +412,11 @@
     .dropcap::first-letter {
       float: left;
       font-family: var(--serif);
-      font-weight: 700;
+      font-weight: 400;
       font-size: 4.4em;
       line-height: 0.82;
       padding: 0.06em 0.1em 0 0;
-      color: var(--accent);
+      color: var(--ink);
     }
     .letter__body.dropcap::first-letter { font-size: 3.6em; }
 
@@ -437,7 +427,7 @@
       text-align: center;
       padding: 72px var(--gutter) 32px;
     }
-    .footer .kicker { display: block; color: #a9a09a; }
+    .footer .kicker { display: block; color: var(--paper); }
     .footer__email {
       display: inline-block;
       font-family: var(--serif);
@@ -446,27 +436,26 @@
       margin: 12px 0 28px;
       overflow-wrap: anywhere;
     }
-    .footer__email:hover { color: #e3b7a9; }
+    .footer__email:hover, .footer__links a:hover { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.12em; }
     .footer__links {
       list-style: none; padding: 0; margin: 0 0 48px;
       display: flex; flex-wrap: wrap; justify-content: center; gap: 12px 32px;
       font-size: 0.75rem; letter-spacing: 0.2em; text-transform: uppercase;
     }
-    .footer__links a:hover { color: #e3b7a9; }
-    .footer__fine { font-size: 0.72rem; color: #8a817b; letter-spacing: 0.1em; margin: 0; }
+    .footer__fine { font-size: 0.72rem; color: var(--paper); letter-spacing: 0.1em; margin: 0; }
 
     /* ---- Article ----------------------------------------------------------- */
     .article { max-width: var(--max); margin: 0 auto; padding: 0 var(--gutter) 80px; }
     .article__header { text-align: center; padding: clamp(40px, 7vw, 80px) 0 40px; max-width: 900px; margin: 0 auto; }
     .article__title {
       font-family: var(--serif);
-      font-weight: 800;
+      font-weight: 500;
       font-size: clamp(3rem, 10vw, 7.5rem);
       line-height: 0.95;
       letter-spacing: -0.02em;
       margin: 16px 0 20px;
     }
-    .article__dek { font-family: var(--serif); font-style: italic; font-size: clamp(1.2rem, 2.4vw, 1.6rem); color: var(--ink-soft); margin: 0; }
+    .article__dek { font-family: var(--serif); font-style: italic; font-size: clamp(1.2rem, 2.4vw, 1.6rem); color: var(--ink); margin: 0; }
     .article__hero { aspect-ratio: 16 / 8; overflow: hidden; }
     .article__hero img, .article__hero .placeholder { width: 100%; height: 100%; object-fit: cover; }
 
@@ -479,7 +468,7 @@
     }
     .credits { position: sticky; top: 24px; align-self: start; border-top: 1px solid var(--ink); padding-top: 16px; }
     .credits dl { margin: 0; }
-    .credits dt { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink-soft); }
+    .credits dt { font-size: 0.66rem; font-weight: 600; letter-spacing: 0.2em; text-transform: uppercase; color: var(--ink); }
     .credits dd { margin: 2px 0 18px; font-family: var(--serif); font-size: 1.05rem; }
     .credits__links { display: grid; gap: 10px; margin-top: 8px; }
     .button {
@@ -496,18 +485,18 @@
 
     .article__body { font-size: 1.08rem; line-height: 1.8; }
     .article__body p { margin: 0 0 1.4em; }
-    .article__lede { font-family: var(--serif); font-size: 1.45rem; line-height: 1.5; border-bottom: 1px solid var(--rule); padding-bottom: 1.2em; }
-    .article__h { font-family: var(--serif); font-style: italic; font-weight: 600; font-size: 1.9rem; margin: 1.6em 0 0.5em; }
+    .article__lede { font-family: var(--serif); font-size: 1.45rem; line-height: 1.5; border-bottom: 1px solid var(--ink); padding-bottom: 1.2em; }
+    .article__h { font-family: var(--serif); font-style: italic; font-weight: 400; font-size: 1.9rem; margin: 1.6em 0 0.5em; }
     .pullquote {
       margin: 1.6em -0.5em;
       padding: 0.8em 0;
-      border-top: 3px solid var(--accent);
-      border-bottom: 1px solid var(--accent);
+      border-top: 1px solid var(--ink);
+      border-bottom: 1px solid var(--ink);
       font-family: var(--serif);
       font-style: italic;
       font-size: clamp(1.6rem, 3.4vw, 2.3rem);
       line-height: 1.25;
-      color: var(--accent);
+      color: var(--ink);
       text-align: center;
     }
 
@@ -516,7 +505,7 @@
     .gallery__item:nth-child(3n + 1),
     .gallery__item:last-child:nth-child(3n + 2) { grid-column: 1 / -1; }
     .gallery__item .placeholder { aspect-ratio: 16 / 9; }
-    .gallery figcaption { font-size: 0.82rem; color: var(--ink-soft); padding-top: 10px; border-bottom: 1px solid var(--rule); padding-bottom: 10px; }
+    .gallery figcaption { font-size: 0.82rem; color: var(--ink); padding-top: 10px; border-bottom: 1px solid var(--ink); padding-bottom: 10px; }
 
     .next {
       display: grid;
@@ -524,12 +513,12 @@
       text-align: center;
       margin-top: 80px;
       padding: 48px 0;
-      border-top: 3px double var(--ink);
+      border-top: 1px solid var(--ink);
       border-bottom: 1px solid var(--ink);
     }
-    .next__title { font-family: var(--serif); font-weight: 800; font-size: clamp(2.4rem, 7vw, 5rem); line-height: 1; }
-    .next__dek { font-family: var(--serif); font-style: italic; color: var(--ink-soft); font-size: 1.2rem; }
-    .next:hover .next__title { color: var(--accent); }
+    .next__title { font-family: var(--serif); font-weight: 500; font-size: clamp(2.4rem, 7vw, 5rem); line-height: 1; }
+    .next__dek { font-family: var(--serif); font-style: italic; color: var(--ink); font-size: 1.2rem; }
+    .next:hover .next__title { text-decoration: underline; text-decoration-thickness: 1px; text-underline-offset: 0.12em; }
 
     .notfound { text-align: center; padding: 120px var(--gutter); }
     .notfound h1 { font-family: var(--serif); font-style: italic; font-size: 3rem; }
@@ -573,10 +562,10 @@
         })[c]);
       }
 
-      // Image, or an editorial placeholder in the project's tone when no image is set.
-      function visual(src, alt, tone, label) {
+      // Image, or an outlined placeholder when no image is set.
+      function visual(src, alt, label) {
         if (src) return `<img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" />`;
-        return `<div class="placeholder" style="--tone:${esc(tone || "#b9a99d")}">
+        return `<div class="placeholder">
           <span>${esc(label || alt)}</span></div>`;
       }
 
@@ -629,7 +618,7 @@
             </div>
             ${feature ? `
             <a class="cover__image" href="${projectUrl(feature)}">
-              ${visual(feature.cover, feature.title, feature.tone, feature.title)}
+              ${visual(feature.cover, feature.title, feature.title)}
               <span class="cover__tag">${esc(feature.category)} · ${esc(feature.year)}</span>
             </a>` : ""}
           </section>`;
@@ -644,7 +633,7 @@
         const cards = PROJECTS.map((p, i) => `
           <article class="card ${i % 3 === 0 ? "card--wide" : ""}">
             <a href="${projectUrl(p)}" class="card__image">
-              ${visual(p.cover, p.title, p.tone, p.title)}
+              ${visual(p.cover, p.title, p.title)}
             </a>
             <div class="card__body">
               <span class="kicker">${pad(i + 1)} — ${esc(p.category)}</span>
@@ -703,7 +692,7 @@
 
         const gallery = (p.gallery || []).map((g) => `
           <figure class="gallery__item">
-            ${visual(g.src, g.caption, p.tone, "Image")}
+            ${visual(g.src, g.caption, "Image")}
             ${g.caption ? `<figcaption>${esc(g.caption)}</figcaption>` : ""}
           </figure>`).join("");
 
@@ -720,7 +709,7 @@
               <p class="article__dek">${esc(p.dek)}</p>
             </header>
 
-            <div class="article__hero">${visual(p.cover, p.title, p.tone, p.title)}</div>
+            <div class="article__hero">${visual(p.cover, p.title, p.title)}</div>
 
             <div class="article__layout">
               <aside class="credits">
