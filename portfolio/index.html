@@ -1,0 +1,56 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1" />
+  <title>Portfolio</title>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=Bodoni+Moda:ital,opsz,wght@0,6..96,400..900;1,6..96,400..900&family=Inter:wght@300;400;500;600&display=swap" rel="stylesheet" />
+  <link rel="stylesheet" href="css/style.css" />
+</head>
+<body data-page="home">
+  <header class="masthead">
+    <div class="masthead__meta">
+      <span data-site="issue"></span>
+      <span data-site="title"></span>
+      <span id="today"></span>
+    </div>
+    <a href="index.html" class="masthead__logo" data-site="masthead"></a>
+    <nav class="masthead__nav">
+      <a href="#work">The Work</a>
+      <a href="#about">Editor's Letter</a>
+      <a href="#contact">Contact</a>
+    </nav>
+  </header>
+
+  <main>
+    <section class="cover" id="cover"></section>
+
+    <section class="contents" id="work">
+      <div class="section-head">
+        <span class="kicker">In this issue</span>
+        <h2>Selected Work</h2>
+      </div>
+      <ol class="toc" id="toc"></ol>
+      <div class="grid" id="grid"></div>
+    </section>
+
+    <section class="letter" id="about">
+      <span class="kicker">Editor's Letter</span>
+      <p class="letter__body dropcap" data-site="about"></p>
+      <p class="letter__sign">— <span data-site="name"></span></p>
+    </section>
+  </main>
+
+  <footer class="footer" id="contact">
+    <p class="kicker">Get in touch</p>
+    <a class="footer__email" id="email"></a>
+    <ul class="footer__links" id="links"></ul>
+    <p class="footer__fine">© <span id="year"></span> <span data-site="name"></span></p>
+  </footer>
+
+  <script src="js/projects.js"></script>
+  <script src="js/main.js"></script>
+</body>
+</html>
