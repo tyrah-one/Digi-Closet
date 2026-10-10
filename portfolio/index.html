@@ -569,7 +569,7 @@
           <span>${esc(label || alt)}</span></div>`;
       }
 
-      const projectUrl = (p) => `#project/${encodeURIComponent(p.id)}`;
+      const projectUrl = (p) => `#project-${encodeURIComponent(p.id)}`;
 
       // ---- Shared chrome -------------------------------------------------------
       function renderMasthead(slim) {
@@ -738,11 +738,11 @@
           </article>`;
       }
 
-      // ---- Routing: "#project/<id>" opens a case study, anything else is home ----
+      // ---- Routing: "#project-<id>" opens a case study, anything else is home ----
       function route() {
         const hash = decodeURIComponent(location.hash.slice(1));
-        if (hash.startsWith("project/")) {
-          renderProject(hash.slice("project/".length));
+        if (hash.startsWith("project-")) {
+          renderProject(hash.slice("project-".length));
           window.scrollTo(0, 0);
           return;
         }

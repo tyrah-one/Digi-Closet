@@ -10,7 +10,7 @@ Your content is in the first `<script>` block at the top of `index.html`:
 - `PROJECTS` — one entry per portfolio piece. Each has a short `blurb` (shown on the home page cards)
   and a longer `story` (the case-study article). Put `{ heading: "..." }` inside `story` for section headings.
 
-Each project opens at `index.html#project/<id>`.
+Each project opens at `index.html#project-<id>`.
 
 Drop images into `images/` and reference them, e.g. `cover: "images/atelier-cover.jpg"`
 (or use a full `https://...` image URL). Leave `cover` / `src` empty to show an outlined placeholder.
