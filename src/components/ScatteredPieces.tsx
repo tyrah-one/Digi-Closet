@@ -2,10 +2,10 @@ import { useState } from 'react'
 import { useCloset } from '../ClosetContext'
 
 // Where each scattered piece sits, how big it is and how much it tilts.
-// "home" pieces sit around the big title; "page" pieces sit in the
-// space between a page's title and its buttons.
+// "home" has one piece on each side of the big title; "page" pieces sit
+// in the space between a page's title and its buttons.
 const SPOTS = {
-  home: ['spot-1', 'spot-2', 'spot-3', 'spot-4'],
+  home: ['spot-1', 'spot-2'],
   page: ['spot-1', 'spot-2', 'spot-3'],
 }
 

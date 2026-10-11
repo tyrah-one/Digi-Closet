@@ -206,6 +206,9 @@ button.danger:hover:not(:disabled) {
   font-size: calc((100vw - 2 * var(--title-gap)) / 7.2);
   line-height: 1;
   white-space: nowrap;
+  /* Sit in front of the scattered pieces, so they tuck behind the letters */
+  position: relative;
+  z-index: 1;
 }
 
 .home-intro p {
@@ -226,7 +229,7 @@ button.danger:hover:not(:disabled) {
 .home-links {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  margin-top: 110px; /* room for the scattered pieces above */
+  margin-top: 48px;
   border-top: 1px solid var(--line);
   border-left: 1px solid var(--line);
 }
@@ -323,37 +326,21 @@ button.danger:hover:not(:disabled) {
 }
 
 .scatter-home .spot-1 {
-  --size: clamp(110px, 12.5vw, 165px); /* grows with the screen */
+  --size: clamp(110px, 13vw, 180px); /* grows with the screen */
   --tilt: -12deg;
-  left: 5vw;
-  bottom: -90px;
+  left: 2vw;
+  top: 6vw; /* starts partway down the big title, so it overlaps the letters */
 }
 
 .scatter-home .spot-2 {
-  --size: clamp(120px, 13.5vw, 180px);
+  --size: clamp(120px, 14vw, 190px);
   --tilt: 9deg;
-  right: 5vw;
-  bottom: -96px;
-}
-
-.scatter-home .spot-3 {
-  --size: 96px;
-  --tilt: 16deg;
-  left: 23vw;
-  bottom: -84px;
-}
-
-.scatter-home .spot-4 {
-  --size: 104px;
-  --tilt: -14deg;
-  right: 22vw;
-  bottom: -88px;
+  right: 2vw;
+  top: 5vw;
 }
 
 /* Medium screens: fewer pieces so they don't bump into the text */
 @media (max-width: 1000px) {
-  .scatter-home .spot-3,
-  .scatter-home .spot-4,
   .scatter-page .spot-3 {
     display: none;
   }
@@ -376,10 +363,6 @@ button.danger:hover:not(:disabled) {
 
   .page-header {
     min-height: 0;
-  }
-
-  .home-links {
-    margin-top: 48px;
   }
 }
 
