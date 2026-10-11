@@ -383,8 +383,8 @@ button.danger:hover:not(:disabled) {
 .scatter-home .spot-1 {
   --size: clamp(100px, 11vw, 160px); /* grows with the screen */
   --tilt: -14deg;
-  left: calc(var(--size) * -0.8);
-  top: calc(var(--size) * -1);
+  left: calc(var(--size) * -0.9);
+  top: calc(var(--size) * -0.8); /* lower = closer to the boxes */
 }
 
 .scatter-home .spot-2 {
