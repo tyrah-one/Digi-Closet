@@ -56,32 +56,37 @@
 
     const PROJECTS = [
       {
-        id: "atelier-app",
-        title: "Atelier",
-        dek: "Reimagining how people plan, shop and style their wardrobe.",
-        category: "Mobile App",
+        id: "digi-closet",
+        title: "Digi Closet",
+        dek: "The digital wardrobe and outfit finder.",
+        category: "Web App",
         year: "2026",
-        role: "Lead UX/UI Designer",
+        role: "Designer & Developer",
         client: "Personal project",
-        tools: ["Figma", "FigJam", "Maze", "Protopie"],
-        cover: "",
+        tools: ["React", "TypeScript", "Vite", "CSS"],
+        cover: "images/digi-closet-home.png",
         featured: true,
         blurb:
-          "A wardrobe companion app that helps users mix and match the pieces they already own. I led research, information architecture and the visual system.",
-        pullQuote: "The best outfit is usually already in your closet — the design job was helping people see it.",
+          "A digital closet for staple and statement pieces. Upload your clothes, flip through them to mix and match outfits, and save the looks you love as collages.",
+        pullQuote: "the digital wardrobe and outfit finder <3",
         story: [
-          { heading: "The brief" },
-          "Replace this with the problem you set out to solve. Who were the users, what was frustrating them, and what did success look like?",
-          { heading: "The process" },
-          "Describe your research, the insights that shaped the direction, and the key decisions you made along the way. Mention interviews, competitive audits, journey maps, wireframes and testing rounds.",
-          { heading: "The outcome" },
-          "Share the final design and the results: metrics, user feedback, or what you learned. End with what you would do next.",
+          { heading: "The idea" },
+          "Most of us own more outfits than we realise; we just can't see them all at once. Digi Closet puts every staple and statement piece in one place, so finding an outfit means flipping through what you already have instead of staring into the wardrobe.",
+          { heading: "What it does" },
+          "Upload a photo of a piece, give it a name and pick a category: jacket, top or bottom. My Clothing shows everything grouped by category. Mix & Match has a slot for each category with arrows to flip through your closet, Cher-style, and one click saves the combination. Saved Outfits keeps each look as a collage, with the pieces laid out like cut-outs on a mood board.",
+          { heading: "The look" },
+          "I wanted it to feel like a fashion magazine rather than an app: thin lines, square corners, a Bodoni serif for headings and the menu, Jost for everything else, and a heavy Archivo Black title where my logo stands in for the O in CLOSET. The colours come from a Resene palette. Kina Brown and Half Alabaster do most of the work, and the smaller colours are used as accents in roughly the palette's proportions, like the swatches beside each clothing category.",
+          "Two details give it personality: random pieces from your own closet are scattered around each page title like stickers, and large halftone cut-out figures sit in the page background. Both step aside on smaller screens so they never cover the content.",
+          { heading: "How it's built" },
+          "Digi Closet is a React and TypeScript app built with Vite, with plain CSS where every colour and font is a token at the top of one file. Your closet is saved in the browser for now; moving it to Supabase, so it follows you between devices, is the next step.",
         ],
         gallery: [
-          { src: "", caption: "Onboarding flow — add your screenshot path here" },
-          { src: "", caption: "Outfit builder — high-fidelity screens" },
+          { src: "images/digi-closet-clothing.png", caption: "My Clothing: every piece grouped by category, each with its palette swatch" },
+          { src: "images/digi-closet-upload.png", caption: "Upload: add a photo, name and category" },
+          { src: "images/digi-closet-mix-match.png", caption: "Mix & Match: flip through each category with the arrows" },
+          { src: "images/digi-closet-outfits.png", caption: "Saved Outfits: each look kept as a collage" },
         ],
-        links: [{ label: "View prototype", url: "#" }],
+        links: [],
       },
       {
         id: "harvest-dashboard",
@@ -406,14 +411,15 @@
 
     /* ---------- Image frames (white, thin border) ---------- */
     .frame {
-      aspect-ratio: 4 / 3;
+      aspect-ratio: 16 / 10; /* the shape of a laptop screenshot */
       max-width: 100%;
       background: var(--white);
       border: 1px solid var(--line);
       overflow: hidden;
     }
 
-    .frame img { width: 100%; height: 100%; object-fit: cover; }
+    /* Pictures fill the frame, cropped from the top (keeps the top of screenshots in view) */
+    .frame img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
 
     .frame.empty {
       display: flex;
@@ -505,11 +511,16 @@
 
     .gallery {
       display: grid;
-      grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
-      gap: 24px;
+      grid-template-columns: repeat(auto-fill, minmax(min(100%, 380px), 1fr));
+      align-items: start;
+      gap: 32px 24px;
     }
 
     .gallery figure { margin: 0; }
+
+    /* Gallery pictures are shown whole, at their own shape */
+    .gallery .frame:not(.empty) { aspect-ratio: auto; }
+    .gallery .frame img { height: auto; }
     .gallery figcaption { margin-top: 8px; font-size: 0.85rem; color: var(--grey); }
 
     .next {
@@ -554,6 +565,13 @@
       const categories = [...new Set(PROJECTS.map((p) => p.category))];
       const swatch = (category) => SWATCHES[categories.indexOf(category) % SWATCHES.length];
 
+      // If a picture can't be found, show the empty frame instead of a broken image
+      window.missingImage = (img) => {
+        const box = img.parentNode;
+        box.classList.add("empty");
+        box.innerHTML = `<span class="label">Image not found</span>`;
+      };
+
       function esc(str) {
         return String(str ?? "").replace(/[&<>"']/g, (c) => ({
           "&": "&amp;", "<": "&lt;", ">": "&gt;", '"': "&quot;", "'": "&#39;",
@@ -562,7 +580,7 @@
 
       // A picture in a white frame, or an empty frame when there's no picture yet
       function frame(src, alt, extraClass = "") {
-        if (src) return `<div class="frame ${extraClass}"><img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" /></div>`;
+        if (src) return `<div class="frame ${extraClass}"><img src="${esc(src)}" alt="${esc(alt)}" loading="lazy" onerror="missingImage(this)" /></div>`;
         return `<div class="frame empty ${extraClass}"><span class="label">Add image</span></div>`;
       }
 
