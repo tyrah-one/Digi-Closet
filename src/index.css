@@ -260,9 +260,14 @@ button.danger:hover:not(:disabled) {
   font-size: calc((100vw - 2 * var(--title-gap)) / 7.2);
   line-height: 1;
   white-space: nowrap;
-  /* Sit in front of the scattered pieces, so they tuck behind the letters */
-  position: relative;
-  z-index: 1;
+}
+
+/* The logo standing in for the O in CLOSET, sized to the capital letters */
+.title-logo {
+  height: 0.76em;
+  width: auto;
+  margin-inline: 0.02em;
+  vertical-align: baseline;
 }
 
 .home-intro p {
@@ -369,28 +374,39 @@ button.danger:hover:not(:disabled) {
   top: 34px;
 }
 
-/* On the home page: pieces sit on both sides of the tagline.
-   The container stretches to the full screen width like the big title. */
-.home-intro {
+/* On the home page: pieces sit diagonally at the corners of the link boxes,
+   one off the top-left corner and one off the bottom-right corner */
+.home-links-wrap {
   position: relative;
 }
 
-.scatter-home {
-  inset-inline: calc(50% - 50vw);
-}
-
 .scatter-home .spot-1 {
-  --size: clamp(110px, 13vw, 180px); /* grows with the screen */
-  --tilt: -12deg;
-  left: 2vw;
-  top: 6vw; /* starts partway down the big title, so it overlaps the letters */
+  --size: clamp(100px, 11vw, 160px); /* grows with the screen */
+  --tilt: -14deg;
+  left: calc(var(--size) * -0.8);
+  top: calc(var(--size) * -1);
 }
 
 .scatter-home .spot-2 {
-  --size: clamp(120px, 14vw, 190px);
-  --tilt: 9deg;
-  right: 2vw;
-  top: 5vw;
+  --size: clamp(100px, 11vw, 160px);
+  --tilt: 12deg;
+  right: calc(var(--size) * -0.8);
+  bottom: calc(var(--size) * -1);
+}
+
+/* When the boxes fill the screen width, tuck the pieces onto the corners instead */
+@media (max-width: 1200px) {
+  .scatter-home .spot-1 {
+    --size: 100px;
+    left: 8px;
+    top: -90px;
+  }
+
+  .scatter-home .spot-2 {
+    --size: 100px;
+    right: 8px;
+    bottom: -90px;
+  }
 }
 
 /* Medium screens: fewer pieces so they don't bump into the text */
