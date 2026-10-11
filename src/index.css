@@ -1,0 +1,759 @@
+/* Minimal, chic look: thin lines, square corners,
+   a fashion-magazine serif for headings and a clean sans for everything else.
+
+   Colours come from the owner's Resene colour palette.
+   The two biggest colours (Kina Brown, Half Alabaster) do most of the work;
+   the smaller ones are used as accents, roughly in the palette's proportions. */
+:root {
+  /* The palette */
+  --kina-brown: #413b38; /* 30% */
+  --half-alabaster: #fdfdfc; /* 30% */
+  --kensington-grey: #9c9e98; /* 9% */
+  --swiss-caramel: #ac7548; /* 5% */
+  --weathered-yellow: #e4daa2; /* 5% */
+  --wimbledon: #4f6f37; /* 4% */
+  --burgundy: #6c2b2b; /* 4% */
+  --mantis: #88bf4d; /* 2% */
+  --bright-red: #81161a; /* 2% */
+  --lemon-ginger: #978732; /* 2% */
+
+  /* What each colour is used for */
+  --paper: var(--half-alabaster); /* page background */
+  --white: #ffffff; /* photo frames, so clothes look true to colour */
+  --ink: var(--kina-brown); /* main text, buttons, title */
+  --grey: color-mix(in srgb, var(--kina-brown) 70%, var(--half-alabaster)); /* quiet text */
+  --line: color-mix(in srgb, var(--kensington-grey) 45%, var(--half-alabaster)); /* thin borders */
+  --accent: var(--swiss-caramel); /* active page underline, hovers */
+  --highlight: color-mix(in srgb, var(--weathered-yellow) 35%, var(--half-alabaster)); /* soft hover fill */
+  --board: color-mix(in srgb, var(--weathered-yellow) 45%, var(--half-alabaster)); /* collage background */
+  --success: var(--wimbledon); /* "Saved!" messages */
+  --danger: var(--bright-red); /* delete actions only */
+
+  --serif: 'Bodoni Moda', 'Didot', 'Bodoni 72', Georgia, serif;
+  --sans: 'Jost', 'Futura', 'Century Gothic', system-ui, sans-serif;
+  --display: 'Archivo Black', 'Arial Black', Impact, sans-serif; /* big home title only */
+}
+
+/* ---------- Basics ---------- */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  margin: 0;
+  font-family: var(--sans);
+  font-weight: 300;
+  font-size: 16px;
+  line-height: 1.6;
+  color: var(--ink);
+  background: var(--paper);
+}
+
+main {
+  max-width: 960px;
+  margin: 0 auto;
+  padding: 40px 16px 64px;
+}
+
+h1,
+h2 {
+  font-weight: 400;
+  text-wrap: balance;
+}
+
+h1 {
+  margin: 0 0 24px;
+  font-family: var(--serif);
+  font-size: 2.6rem;
+  line-height: 1.1;
+}
+
+/* Section headings are small spaced-out capitals */
+h2 {
+  margin: 40px 0 16px;
+  font-size: 0.8rem;
+  letter-spacing: 0.2em;
+  text-transform: uppercase;
+}
+
+a {
+  color: var(--ink);
+}
+
+strong {
+  font-weight: 500;
+}
+
+.muted {
+  color: var(--grey);
+}
+
+/* ---------- Buttons ---------- */
+button {
+  font: inherit;
+  font-size: 0.75rem;
+  font-weight: 400;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+  padding: 10px 20px;
+  border: 1px solid var(--ink);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+  cursor: pointer;
+  transition: background 0.15s, color 0.15s;
+}
+
+button:hover:not(:disabled) {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+button:focus-visible,
+a:focus-visible {
+  outline: 2px solid var(--ink);
+  outline-offset: 3px;
+}
+
+button:disabled {
+  opacity: 0.3;
+  cursor: not-allowed;
+}
+
+button.primary {
+  background: var(--ink);
+  color: var(--paper);
+}
+
+button.primary:hover:not(:disabled) {
+  background: var(--accent);
+  border-color: var(--accent);
+}
+
+button.danger {
+  color: var(--danger);
+  border-color: var(--danger);
+}
+
+button.danger:hover:not(:disabled) {
+  background: var(--danger);
+  color: var(--white);
+}
+
+/* ---------- Navigation bar ---------- */
+.nav {
+  position: relative;
+  z-index: 2; /* stays in front of the page figures */
+  display: flex;
+  flex-wrap: wrap;
+  align-items: center;
+  justify-content: space-between;
+  gap: 8px 32px;
+  padding: 12px 24px;
+  background: var(--paper);
+  border-bottom: 1px solid var(--line);
+}
+
+.nav a {
+  color: var(--ink);
+  text-decoration: none;
+}
+
+.nav nav {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 8px 48px; /* space between the page links */
+}
+
+/* Page links use the serif, like the logo */
+.nav nav a {
+  font-family: var(--serif);
+  font-size: 0.85rem;
+  letter-spacing: 0.16em;
+  text-transform: uppercase;
+  padding-bottom: 2px;
+  border-bottom: 1px solid transparent;
+}
+
+.nav nav a:hover,
+.nav nav a.active {
+  border-bottom-color: var(--accent);
+}
+
+.nav .logo {
+  display: block;
+  line-height: 0;
+}
+
+/* The logo picture in the top bar */
+.nav .logo img {
+  height: 56px; /* change this number to resize the logo */
+  width: auto;
+}
+
+/* ---------- Page figures (large halftone cut-outs in the page background) ---------- */
+/* The whole page (top bar + content) is the frame the figures are placed in */
+#root {
+  position: relative;
+  z-index: 0;
+  min-height: 100vh; /* short pages still fill the screen */
+  background: var(--paper); /* gives the scattered pieces' white a page colour to blend into */
+}
+
+/* Covers the whole page behind everything; trims figures at the page's bottom edge */
+.figure-layer {
+  position: absolute;
+  inset: 0;
+  z-index: -1; /* behind the top bar and all page content */
+  overflow: hidden;
+  pointer-events: none; /* clicks go straight through */
+}
+
+/* Placed on the page (not the screen), so figures scroll away with the page */
+.page-figure {
+  position: absolute;
+  height: auto;
+}
+
+/* Upload: right side, standing on the bottom of the page */
+.page-figure.upload {
+  right: 5vw;
+  bottom: 0;
+  width: 25vw;
+}
+
+/* Mix & Match: bottom left, cut off by the left edge */
+.page-figure.mixmatch {
+  left: -14vw;
+  bottom: 0;
+  width: 44vw;
+}
+
+/* Smaller screens: the left-side figures would sit behind the text, so hide them */
+@media (max-width: 1200px) {
+  .page-figure.mixmatch {
+    display: none;
+  }
+}
+
+/* Phones: no spare room at the edges, so hide the figures */
+@media (max-width: 700px) {
+  .figure-layer {
+    display: none;
+  }
+}
+
+/* ---------- Home page ---------- */
+.home-intro {
+  text-align: center;
+  /* Space between the big title and the screen edges */
+  --title-gap: max(24px, 5vw);
+}
+
+/* Big title that stretches almost edge to edge on any screen size.
+   The negative side margins let it grow wider than the page column,
+   and dividing the width by 7.2 fits "DIGI CLOSET" in Archivo Black. */
+.home-intro h1 {
+  margin-inline: calc(50% - 50vw + var(--title-gap));
+  margin-block: 8px 20px; /* fixed spacing, so it doesn't grow with the font */
+  font-family: var(--display);
+  font-size: calc((100vw - 2 * var(--title-gap)) / 7.2);
+  line-height: 1;
+  white-space: nowrap;
+}
+
+/* The logo standing in for the O in CLOSET, sized to the capital letters */
+.title-logo {
+  height: 0.76em;
+  width: auto;
+  margin-inline: 0.02em;
+  vertical-align: baseline;
+}
+
+.home-intro p {
+  margin: 0 0 8px;
+}
+
+.home-intro .tagline {
+  font-size: 1.1rem;
+  letter-spacing: 0.04em;
+}
+
+.home-intro .muted {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.home-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
+  margin-top: 48px;
+  border-top: 1px solid var(--line);
+  border-left: 1px solid var(--line);
+}
+
+.card-link {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  padding: 28px 24px;
+  border-right: 1px solid var(--line);
+  border-bottom: 1px solid var(--line);
+  color: inherit;
+  text-decoration: none;
+  transition: background 0.15s;
+}
+
+.card-link:hover {
+  background: var(--highlight);
+}
+
+.card-link strong {
+  font-family: var(--serif);
+  font-size: 1.4rem;
+  font-weight: 400;
+}
+
+.card-link span {
+  color: var(--grey);
+  font-size: 0.9rem;
+}
+
+/* ---------- Shared page pieces ---------- */
+.page-header {
+  position: relative; /* so scattered pieces are placed relative to it */
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 16px;
+  min-height: 150px; /* room for the scattered pieces */
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  margin: 0;
+}
+
+/* ---------- Scattered clothing pieces (decoration around titles) ---------- */
+.scatter {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* clicks go straight through to the page */
+}
+
+.scatter img {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  object-fit: contain;
+  transform: rotate(var(--tilt));
+  /* Makes the white photo background melt into the page, like a cut-out sticker */
+  mix-blend-mode: multiply;
+}
+
+/* On sub pages: pieces sit between the title and the buttons */
+.scatter-page .spot-1 {
+  --size: 120px;
+  --tilt: -10deg;
+  left: 38%;
+  top: 6px;
+}
+
+.scatter-page .spot-2 {
+  --size: 88px;
+  --tilt: 14deg;
+  left: 54%;
+  top: 0;
+}
+
+.scatter-page .spot-3 {
+  --size: 105px;
+  --tilt: -4deg;
+  left: 65%;
+  top: 34px;
+}
+
+/* On the home page: pieces sit diagonally at the corners of the link boxes,
+   one off the top-left corner and one off the bottom-right corner */
+.home-links-wrap {
+  position: relative;
+}
+
+.scatter-home .spot-1 {
+  --size: clamp(100px, 11vw, 160px); /* grows with the screen */
+  --tilt: -14deg;
+  left: calc(var(--size) * -0.9);
+  top: calc(var(--size) * -0.8); /* lower = closer to the boxes */
+}
+
+.scatter-home .spot-2 {
+  --size: clamp(100px, 11vw, 160px);
+  --tilt: 12deg;
+  right: calc(var(--size) * -0.8);
+  bottom: calc(var(--size) * -1);
+}
+
+/* When the boxes fill the screen width, tuck the pieces onto the corners instead */
+@media (max-width: 1200px) {
+  .scatter-home .spot-1 {
+    --size: 100px;
+    left: 8px;
+    top: -90px;
+  }
+
+  .scatter-home .spot-2 {
+    --size: 100px;
+    right: 8px;
+    bottom: -90px;
+  }
+}
+
+/* Medium screens: fewer pieces so they don't bump into the text */
+@media (max-width: 1000px) {
+  .scatter-page .spot-3 {
+    display: none;
+  }
+
+  /* Move the remaining pieces right, clear of longer titles */
+  .scatter-page .spot-1 {
+    left: 47%;
+  }
+
+  .scatter-page .spot-2 {
+    left: 64%;
+  }
+}
+
+/* Phones: no room beside the text, so hide the decoration */
+@media (max-width: 700px) {
+  .scatter {
+    display: none;
+  }
+
+  .page-header {
+    min-height: 0;
+  }
+}
+
+.empty {
+  padding: 48px 24px;
+  text-align: center;
+  border: 1px solid var(--line);
+}
+
+.delete-badge {
+  position: absolute;
+  top: 8px;
+  right: 8px;
+  width: 28px;
+  height: 28px;
+  padding: 0;
+  font-size: 0.8rem;
+  letter-spacing: 0;
+  border-color: var(--ink);
+  background: var(--ink);
+  color: var(--paper);
+}
+
+/* ---------- Clothing page ---------- */
+/* Each category heading gets a small swatch from the palette */
+.category-heading {
+  display: flex;
+  align-items: center;
+  gap: 10px;
+}
+
+.category-heading::before {
+  content: '';
+  width: 10px;
+  height: 10px;
+}
+
+.category-heading.jacket::before {
+  background: var(--burgundy);
+}
+
+.category-heading.top::before {
+  background: var(--mantis);
+}
+
+.category-heading.bottom::before {
+  background: var(--lemon-ginger);
+}
+
+.grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(160px, 1fr));
+  gap: 20px;
+}
+
+.piece {
+  position: relative;
+  margin: 0;
+}
+
+.piece img {
+  display: block;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  object-fit: contain;
+  padding: 12px;
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.piece figcaption {
+  margin-top: 8px;
+  font-size: 0.85rem;
+}
+
+/* ---------- Upload page ---------- */
+.upload-form {
+  display: flex;
+  flex-direction: column;
+  gap: 20px;
+  max-width: 420px;
+}
+
+.upload-form label {
+  display: flex;
+  flex-direction: column;
+  gap: 6px;
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+  text-transform: uppercase;
+}
+
+.upload-form input[type='text'],
+.upload-form select {
+  font: inherit;
+  font-size: 1rem;
+  letter-spacing: normal;
+  text-transform: none;
+  padding: 8px 0;
+  border: none;
+  border-bottom: 1px solid var(--ink);
+  border-radius: 0;
+  background: transparent;
+  color: var(--ink);
+}
+
+.upload-form input[type='text']:focus,
+.upload-form select:focus {
+  outline: none;
+  border-bottom-width: 2px;
+}
+
+.photo-drop {
+  align-items: center;
+  justify-content: center;
+  height: 320px;
+  background: var(--white);
+  border: 1px dashed var(--grey);
+  cursor: pointer;
+  color: var(--grey);
+}
+
+.photo-drop img {
+  max-width: 100%;
+  max-height: 100%;
+  object-fit: contain;
+}
+
+.photo-drop input {
+  display: none;
+}
+
+.button-row {
+  display: flex;
+  gap: 8px;
+}
+
+.message {
+  margin: 0;
+  font-size: 0.9rem;
+  color: var(--success);
+}
+
+/* ---------- Mix & Match page ---------- */
+.mix-layout {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 48px;
+  align-items: flex-start;
+}
+
+.slots {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 100%;
+  max-width: 400px;
+}
+
+.slot {
+  display: flex;
+  align-items: center;
+  gap: 8px;
+}
+
+/* The ◀ ▶ arrows are plain, no box */
+.slot > button {
+  height: 60px;
+  padding: 0 10px;
+  border: none;
+  font-size: 1rem;
+}
+
+.slot-window {
+  flex: 1;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  height: 190px;
+  padding: 10px;
+  background: var(--white);
+  border: 1px solid var(--line);
+}
+
+.slot-window img {
+  flex: 1;
+  min-height: 0;
+  max-width: 100%;
+  object-fit: contain;
+}
+
+.slot-label {
+  font-size: 0.75rem;
+  letter-spacing: 0.12em;
+  text-transform: uppercase;
+  color: var(--grey);
+}
+
+.save-outfit {
+  margin-top: 8px;
+  padding: 14px;
+}
+
+.saved-preview {
+  display: flex;
+  flex-direction: column;
+  gap: 12px;
+  width: 280px;
+  max-width: 100%;
+}
+
+.saved-preview h2 {
+  margin: 0;
+  color: var(--success);
+}
+
+/* ---------- Collage (used on Mix & Match and Saved Outfits) ---------- */
+.collage {
+  position: relative;
+  width: 100%;
+  aspect-ratio: 3 / 4;
+  background: var(--board);
+  overflow: hidden;
+}
+
+.collage img {
+  position: absolute;
+  width: 58%;
+  padding: 6px;
+  background: var(--white);
+  box-shadow: 0 1px 4px color-mix(in srgb, var(--ink) 20%, transparent);
+  object-fit: contain;
+  aspect-ratio: 1;
+}
+
+.collage-jacket {
+  top: 6%;
+  left: 4%;
+  transform: rotate(-5deg);
+}
+
+.collage-top {
+  top: 10%;
+  right: 4%;
+  transform: rotate(4deg);
+  z-index: 1;
+}
+
+.collage-bottom {
+  bottom: 4%;
+  left: 21%;
+  transform: rotate(-2deg);
+  z-index: 2;
+}
+
+/* Without a jacket, center the top above the bottom */
+.collage.no-jacket .collage-top {
+  right: 21%;
+}
+
+/* ---------- Saved Outfits page ---------- */
+.outfit-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(220px, 1fr));
+  gap: 24px;
+}
+
+.outfit-card {
+  position: relative;
+  display: flex;
+  flex-direction: column;
+  gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--ink); /* outline box around each outfit */
+}
+
+/* Saved outfits sit straight on the page colour (no beige board) */
+.outfit-card .collage {
+  background: transparent;
+}
+
+.outfit-card > .muted {
+  font-size: 0.75rem;
+  letter-spacing: 0.15em;
+}
+
+.outfit-card .delete-badge {
+  z-index: 3;
+}
+
+/* "Yes, delete / Cancel" box that covers a card while confirming */
+.confirm-box {
+  position: absolute;
+  inset: 0;
+  z-index: 4;
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  padding: 8px;
+  text-align: center;
+  background: color-mix(in srgb, var(--paper) 95%, transparent);
+  border: 1px solid var(--ink);
+}
+
+.confirm-box > span {
+  font-family: var(--serif);
+  font-size: 1.1rem;
+}
+
+.confirm-box small {
+  color: var(--grey);
+}
+
+.confirm-box .button-row {
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.confirm-box button {
+  padding: 8px 12px;
+}
