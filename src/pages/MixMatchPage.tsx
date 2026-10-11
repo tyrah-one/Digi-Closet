@@ -4,6 +4,7 @@ import { useCloset } from '../ClosetContext'
 import OutfitCollage from '../components/OutfitCollage'
 import type { ClothingItem, Outfit } from '../types'
 import ScatteredPieces from '../components/ScatteredPieces'
+import PageFigure from '../components/PageFigure'
 
 interface SlotProps {
   label: string
@@ -71,6 +72,7 @@ export default function MixMatchPage() {
 
   return (
     <section>
+      <PageFigure name="mixmatch" />
       <div className="page-header">
         <h1>Mix &amp; Match</h1>
         <ScatteredPieces layout="page" />

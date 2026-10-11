@@ -191,24 +191,75 @@ button.danger:hover:not(:disabled) {
   width: auto;
 }
 
-/* ---------- Page figures (large halftone cut-outs at the screen edge) ---------- */
-.page-figure {
-  position: fixed; /* stays put while the page scrolls */
-  z-index: 1; /* in front of the page, behind the top bar */
+/* ---------- Page figures (large halftone cut-outs in the page background) ---------- */
+/* The whole page (top bar + content) is the frame the figures are placed in */
+#root {
+  position: relative;
+  z-index: 0;
+  min-height: 100vh; /* short pages still fill the screen */
+  background: var(--paper); /* gives the scattered pieces' white a page colour to blend into */
+}
+
+/* Covers the whole page behind everything; trims figures at the page's bottom edge */
+.figure-layer {
+  position: absolute;
+  inset: 0;
+  z-index: -1; /* behind the top bar and all page content */
+  overflow: hidden;
   pointer-events: none; /* clicks go straight through */
+}
+
+/* Placed on the page (not the screen), so figures scroll away with the page */
+.page-figure {
+  position: absolute;
   height: auto;
 }
 
-/* Upload: right side, head tucked behind the top bar, legs run off the bottom */
+/* Home: bottom right, beside the link boxes */
+.page-figure.home {
+  right: -1vw;
+  bottom: 0;
+  width: 20vw;
+}
+
+/* Upload: right side, head tucked behind the top bar */
 .page-figure.upload {
   top: 20px;
   right: 5vw;
   width: 25vw;
 }
 
+/* Mix & Match: bottom left, cut off by the left edge */
+.page-figure.mixmatch {
+  left: -14vw;
+  bottom: 0;
+  width: 44vw;
+}
+
+/* Saved Outfits: left side, starting just under the top bar */
+.page-figure.outfits {
+  left: -3vw;
+  top: 6vw;
+  width: 23vw;
+}
+
+/* Smaller screens: the left-side figures would sit behind the text, so hide them */
+@media (max-width: 1200px) {
+  .page-figure.mixmatch,
+  .page-figure.outfits {
+    display: none;
+  }
+}
+
+@media (max-width: 1000px) {
+  .page-figure.home {
+    display: none;
+  }
+}
+
 /* Phones: no spare room at the edges, so hide the figures */
 @media (max-width: 700px) {
-  .page-figure {
+  .figure-layer {
     display: none;
   }
 }

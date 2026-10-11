@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useCloset } from '../ClosetContext'
 import OutfitCollage from '../components/OutfitCollage'
 import ScatteredPieces from '../components/ScatteredPieces'
+import PageFigure from '../components/PageFigure'
 
 export default function OutfitsPage() {
   const { outfits, deleteOutfit } = useCloset()
@@ -12,6 +13,7 @@ export default function OutfitsPage() {
 
   return (
     <section>
+      <PageFigure name="outfits" />
       <div className="page-header">
         <h1>Saved Outfits</h1>
         <ScatteredPieces layout="page" />

@@ -17,7 +17,7 @@ The owner is a beginner (some Java, a little HTML/CSS). Keep code simple and rea
 - `src/components/OutfitCollage.tsx` – collage used on Mix & Match and Saved Outfits
 - `src/assets/logo.png` – the owner's logo, shown in the top bar
 - `src/components/ScatteredPieces.tsx` – random closet pieces scattered around page titles as decoration (hidden on phones)
-- `src/components/PageFigure.tsx` + `src/assets/figures/` – large halftone cut-out figures fixed at the screen edge of each page (positioned with `.page-figure.<name>` in index.css, hidden on phones)
+- `src/components/PageFigure.tsx` + `src/assets/figures/` – large halftone cut-out figures in the page background (scroll with the page, behind content; positioned with `.page-figure.<name>` in index.css; hidden on narrower screens)
 
 ## Commands
 - `npm run dev` – local dev server
