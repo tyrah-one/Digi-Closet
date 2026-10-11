@@ -17,6 +17,11 @@ npm run dev      # start the site at http://localhost:5173
 npm run build    # build the finished site into dist/
 ```
 
+## Live website
+Every change merged into `main` is published automatically to GitHub Pages
+(see `.github/workflows/deploy-pages.yml`):
+https://tyrah-one.github.io/Digi-Closet/
+
 ## How it works
 - Built with React + TypeScript + Vite, styled with plain CSS (`src/index.css`).
 - Clothes and outfits are saved in your browser's localStorage, so they stay on the device and browser you used. Photos are shrunk before saving to save space.
