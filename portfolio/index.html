@@ -27,7 +27,7 @@
          tools     – array of tools, e.g. ["Figma", "Maze"]
          cover     – path to a cover image, e.g. "images/fintech-cover.jpg"
                      (leave "" to show an empty frame)
-         featured  – true shows this project first, full width (use one)
+         featured  – true shows this project first (use one)
          blurb     – 1–3 sentences shown on the home page cards and at the top of the project
          story     – the full write-up; one string per paragraph.
                      Use { heading: "..." } for a section heading.
@@ -126,62 +126,6 @@
           { label: "Play the game", url: "https://www.figma.com/make/IhyaQb1YIngoyThrbfrpgG/Multi-page-Interactive-Web-Game?t=2T6Ns96LyIiAAYzu-20&fullscreen=1" },
           { label: "View the Figma Make file", url: "https://www.figma.com/make/IhyaQb1YIngoyThrbfrpgG/Multi-page-Interactive-Web-Game?t=2T6Ns96LyIiAAYzu-1" },
         ],
-      },
-      {
-        id: "harvest-dashboard",
-        title: "Harvest",
-        dek: "A calmer analytics dashboard for small farm co-ops.",
-        category: "Web Platform",
-        year: "2025",
-        role: "Product Designer",
-        client: "Client name",
-        tools: ["Figma", "Notion", "Hotjar"],
-        cover: "",
-        blurb:
-          "Simplified a cluttered reporting tool into a focused dashboard, cutting time-to-insight for co-op managers in usability tests.",
-        pullQuote: "Less data on screen, more decisions made.",
-        story: [
-          { heading: "The brief" },
-          "Write about the challenge here.",
-          { heading: "The outcome" },
-          "Write about what you shipped and the impact.",
-        ],
-        gallery: [],
-        links: [],
-      },
-      {
-        id: "lumen-design-system",
-        title: "Lumen",
-        dek: "Building a design system that a team of twelve actually uses.",
-        category: "Design System",
-        year: "2025",
-        role: "UI Designer",
-        client: "Client name",
-        tools: ["Figma", "Storybook", "Tokens Studio"],
-        cover: "",
-        blurb:
-          "Components, tokens and documentation that brought consistency across three products and sped up handoff to engineering.",
-        pullQuote: "A system is only as good as the people who adopt it.",
-        story: ["Write your case study here."],
-        gallery: [],
-        links: [],
-      },
-      {
-        id: "kin-health",
-        title: "Kin",
-        dek: "Designing a gentler appointment experience for family caregivers.",
-        category: "UX Research",
-        year: "2024",
-        role: "UX Researcher & Designer",
-        client: "Course / bootcamp",
-        tools: ["Figma", "Dovetail", "Optimal Workshop"],
-        cover: "",
-        blurb:
-          "Interviews and card sorting with caregivers revealed where booking broke down; the redesign focused on shared calendars and reminders.",
-        pullQuote: "",
-        story: ["Write your case study here."],
-        gallery: [],
-        links: [],
       },
     ];
   </script>
@@ -397,8 +341,8 @@
 
     .work-card:hover { background: var(--highlight); }
 
-    /* The cover story spans the whole row, picture beside text */
-    .work-card.featured {
+    /* Each project spans the whole row, picture beside text */
+    .work-card.wide {
       grid-column: 1 / -1;
       display: grid;
       grid-template-columns: 1.3fr 1fr;
@@ -407,7 +351,10 @@
     }
 
     .work-card .frame { margin-bottom: 14px; }
-    .work-card.featured .frame { margin-bottom: 0; }
+    .work-card.wide .frame { margin-bottom: 0; }
+
+    /* Every second project has its picture on the right, like a magazine spread */
+    .work-card.wide:nth-child(even) .frame { order: 2; }
 
     .work-card h3 {
       margin: 0;
@@ -416,7 +363,7 @@
       line-height: 1.2;
     }
 
-    .work-card.featured h3 { font-size: 2.2rem; }
+    .work-card.wide h3 { font-size: 2.2rem; }
 
     .work-card .dek { margin: 0; color: var(--grey); font-size: 0.95rem; }
     .work-card .blurb { margin: 6px 0 0; font-size: 0.95rem; }
@@ -572,9 +519,10 @@
 
     /* ---------- Smaller screens ---------- */
     @media (max-width: 760px) {
-      .work-card.featured { grid-template-columns: 1fr; gap: 0; }
-      .work-card.featured .frame { margin-bottom: 14px; }
-      .work-card.featured h3 { font-size: 1.8rem; }
+      .work-card.wide { grid-template-columns: 1fr; gap: 0; }
+      .work-card.wide .frame { margin-bottom: 14px; }
+      .work-card.wide:nth-child(even) .frame { order: 0; }
+      .work-card.wide h3 { font-size: 1.8rem; }
       .project-layout { grid-template-columns: 1fr; gap: 8px; }
       .nav nav { gap: 8px 24px; }
     }
@@ -672,7 +620,7 @@
         const ordered = featured ? [featured, ...PROJECTS.filter((p) => p !== featured)] : [];
 
         const cards = ordered.map((p) => `
-          <a class="work-card ${p === featured ? "featured" : ""}" href="${projectUrl(p)}">
+          <a class="work-card wide" href="${projectUrl(p)}">
             ${frame(p.cover, p.title)}
             <div>
               ${categoryLabel(p)}
