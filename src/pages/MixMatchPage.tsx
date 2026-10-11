@@ -3,6 +3,7 @@ import { Link } from 'react-router-dom'
 import { useCloset } from '../ClosetContext'
 import OutfitCollage from '../components/OutfitCollage'
 import type { ClothingItem, Outfit } from '../types'
+import ScatteredPieces from '../components/ScatteredPieces'
 
 interface SlotProps {
   label: string
@@ -70,7 +71,10 @@ export default function MixMatchPage() {
 
   return (
     <section>
-      <h1>Mix &amp; Match</h1>
+      <div className="page-header">
+        <h1>Mix &amp; Match</h1>
+        <ScatteredPieces layout="page" />
+      </div>
       <p className="muted">Use the arrows to flip through your closet, Cher-style.</p>
 
       <div className="mix-layout">

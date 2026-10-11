@@ -2,6 +2,7 @@ import { useRef, useState, type FormEvent } from 'react'
 import { useCloset } from '../ClosetContext'
 import { resizeImage } from '../resizeImage'
 import { CATEGORIES, type Category } from '../types'
+import ScatteredPieces from '../components/ScatteredPieces'
 
 const CATEGORY_NAMES: Record<Category, string> = { jacket: 'Jacket', top: 'Top', bottom: 'Bottom' }
 
@@ -45,7 +46,10 @@ export default function UploadPage() {
 
   return (
     <section>
-      <h1>Upload a Piece</h1>
+      <div className="page-header">
+        <h1>Upload a Piece</h1>
+        <ScatteredPieces layout="page" />
+      </div>
 
       <form className="upload-form" onSubmit={handleSave}>
         <label className="photo-drop">

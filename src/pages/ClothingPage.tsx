@@ -2,6 +2,7 @@ import { useState } from 'react'
 import { Link } from 'react-router-dom'
 import { useCloset } from '../ClosetContext'
 import { CATEGORIES, CATEGORY_LABELS } from '../types'
+import ScatteredPieces from '../components/ScatteredPieces'
 
 export default function ClothingPage() {
   const { items, outfits, deleteItem } = useCloset()
@@ -17,6 +18,7 @@ export default function ClothingPage() {
     <section>
       <div className="page-header">
         <h1>My Clothing</h1>
+        <ScatteredPieces layout="page" />
         {items.length > 0 && (
           <button
             onClick={() => {

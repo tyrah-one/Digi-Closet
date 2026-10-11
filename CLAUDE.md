@@ -16,6 +16,7 @@ The owner is a beginner (some Java, a little HTML/CSS). Keep code simple and rea
 - `src/pages/` – one file per page
 - `src/components/OutfitCollage.tsx` – collage used on Mix & Match and Saved Outfits
 - `src/assets/logo.png` – the owner's logo, shown in the top bar
+- `src/components/ScatteredPieces.tsx` – random closet pieces scattered around page titles as decoration (hidden on phones)
 
 ## Commands
 - `npm run dev` – local dev server

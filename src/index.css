@@ -260,10 +260,114 @@ button.danger:hover:not(:disabled) {
 
 /* ---------- Shared page pieces ---------- */
 .page-header {
+  position: relative; /* so scattered pieces are placed relative to it */
   display: flex;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 16px;
+  min-height: 100px; /* room for the scattered pieces */
+  margin-bottom: 24px;
+}
+
+.page-header h1 {
+  margin: 0;
+}
+
+/* ---------- Scattered clothing pieces (decoration around titles) ---------- */
+.scatter {
+  position: absolute;
+  inset: 0;
+  pointer-events: none; /* clicks go straight through to the page */
+}
+
+.scatter img {
+  position: absolute;
+  width: var(--size);
+  height: var(--size);
+  object-fit: contain;
+  transform: rotate(var(--tilt));
+  /* Makes the white photo background melt into the page, like a cut-out sticker */
+  mix-blend-mode: multiply;
+}
+
+/* On sub pages: pieces sit between the title and the buttons */
+.scatter-page .spot-1 {
+  --size: 80px;
+  --tilt: -10deg;
+  left: 44%;
+  top: 10px;
+}
+
+.scatter-page .spot-2 {
+  --size: 56px;
+  --tilt: 14deg;
+  left: 57%;
+  top: 0;
+}
+
+.scatter-page .spot-3 {
+  --size: 70px;
+  --tilt: -4deg;
+  left: 68%;
+  top: 22px;
+}
+
+/* On the home page: pieces sit on both sides of the tagline.
+   The container stretches to the full screen width like the big title. */
+.home-intro {
+  position: relative;
+}
+
+.scatter-home {
+  inset-inline: calc(50% - 50vw);
+}
+
+.scatter-home .spot-1 {
+  --size: clamp(76px, 8.5vw, 110px); /* grows with the screen */
+  --tilt: -12deg;
+  left: 7vw;
+  bottom: -32px;
+}
+
+.scatter-home .spot-2 {
+  --size: clamp(80px, 9vw, 120px);
+  --tilt: 9deg;
+  right: 7vw;
+  bottom: -34px;
+}
+
+.scatter-home .spot-3 {
+  --size: 64px;
+  --tilt: 16deg;
+  left: 24vw;
+  bottom: -32px;
+}
+
+.scatter-home .spot-4 {
+  --size: 70px;
+  --tilt: -14deg;
+  right: 23vw;
+  bottom: -36px;
+}
+
+/* Medium screens: fewer pieces so they don't bump into the text */
+@media (max-width: 900px) {
+  .scatter-home .spot-3,
+  .scatter-home .spot-4,
+  .scatter-page .spot-3 {
+    display: none;
+  }
+}
+
+/* Phones: no room beside the text, so hide the decoration */
+@media (max-width: 700px) {
+  .scatter {
+    display: none;
+  }
+
+  .page-header {
+    min-height: 0;
+  }
 }
 
 .empty {
