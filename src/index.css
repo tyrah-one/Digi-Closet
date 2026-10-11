@@ -142,6 +142,8 @@ button.danger:hover:not(:disabled) {
 
 /* ---------- Navigation bar ---------- */
 .nav {
+  position: relative;
+  z-index: 2; /* stays in front of the page figures */
   display: flex;
   flex-wrap: wrap;
   align-items: center;
@@ -187,6 +189,28 @@ button.danger:hover:not(:disabled) {
 .nav .logo img {
   height: 56px; /* change this number to resize the logo */
   width: auto;
+}
+
+/* ---------- Page figures (large halftone cut-outs at the screen edge) ---------- */
+.page-figure {
+  position: fixed; /* stays put while the page scrolls */
+  z-index: 1; /* in front of the page, behind the top bar */
+  pointer-events: none; /* clicks go straight through */
+  height: auto;
+}
+
+/* Upload: right side, head tucked behind the top bar, legs run off the bottom */
+.page-figure.upload {
+  top: 20px;
+  right: 5vw;
+  width: 25vw;
+}
+
+/* Phones: no spare room at the edges, so hide the figures */
+@media (max-width: 700px) {
+  .page-figure {
+    display: none;
+  }
 }
 
 /* ---------- Home page ---------- */

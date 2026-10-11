@@ -3,6 +3,7 @@ import { useCloset } from '../ClosetContext'
 import { resizeImage } from '../resizeImage'
 import { CATEGORIES, type Category } from '../types'
 import ScatteredPieces from '../components/ScatteredPieces'
+import PageFigure from '../components/PageFigure'
 
 const CATEGORY_NAMES: Record<Category, string> = { jacket: 'Jacket', top: 'Top', bottom: 'Bottom' }
 
@@ -46,6 +47,7 @@ export default function UploadPage() {
 
   return (
     <section>
+      <PageFigure name="upload" />
       <div className="page-header">
         <h1>Upload a Piece</h1>
         <ScatteredPieces layout="page" />
