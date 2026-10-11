@@ -144,10 +144,10 @@ button.danger:hover:not(:disabled) {
 .nav {
   display: flex;
   flex-wrap: wrap;
-  align-items: baseline;
+  align-items: center;
   justify-content: space-between;
   gap: 8px 32px;
-  padding: 20px 24px;
+  padding: 12px 24px;
   background: var(--paper);
   border-bottom: 1px solid var(--line);
 }
@@ -179,9 +179,14 @@ button.danger:hover:not(:disabled) {
 }
 
 .nav .logo {
-  font-family: var(--serif);
-  font-size: 1.5rem;
-  letter-spacing: 0.02em;
+  display: block;
+  line-height: 0;
+}
+
+/* The logo picture in the top bar */
+.nav .logo img {
+  height: 56px; /* change this number to resize the logo */
+  width: auto;
 }
 
 /* ---------- Home page ---------- */

@@ -4,13 +4,14 @@ import ClothingPage from './pages/ClothingPage'
 import UploadPage from './pages/UploadPage'
 import MixMatchPage from './pages/MixMatchPage'
 import OutfitsPage from './pages/OutfitsPage'
+import logo from './assets/logo.png'
 
 export default function App() {
   return (
     <>
       <header className="nav">
         <NavLink to="/" className="logo">
-          Digi Closet
+          <img src={logo} alt="Digi Closet home" />
         </NavLink>
         <nav>
           <NavLink to="/clothing">My Clothing</NavLink>
