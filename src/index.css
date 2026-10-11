@@ -215,17 +215,10 @@ button.danger:hover:not(:disabled) {
   height: auto;
 }
 
-/* Home: bottom right, beside the link boxes */
-.page-figure.home {
-  right: -1vw;
-  bottom: 0;
-  width: 20vw;
-}
-
-/* Upload: right side, head tucked behind the top bar */
+/* Upload: right side, standing on the bottom of the page */
 .page-figure.upload {
-  top: 20px;
   right: 5vw;
+  bottom: 0;
   width: 25vw;
 }
 
@@ -236,23 +229,9 @@ button.danger:hover:not(:disabled) {
   width: 44vw;
 }
 
-/* Saved Outfits: left side, starting just under the top bar */
-.page-figure.outfits {
-  left: -3vw;
-  top: 6vw;
-  width: 23vw;
-}
-
 /* Smaller screens: the left-side figures would sit behind the text, so hide them */
 @media (max-width: 1200px) {
-  .page-figure.mixmatch,
-  .page-figure.outfits {
-    display: none;
-  }
-}
-
-@media (max-width: 1000px) {
-  .page-figure.home {
+  .page-figure.mixmatch {
     display: none;
   }
 }

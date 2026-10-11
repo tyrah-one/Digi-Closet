@@ -1,14 +1,12 @@
 import { Link } from 'react-router-dom'
 import { useCloset } from '../ClosetContext'
 import ScatteredPieces from '../components/ScatteredPieces'
-import PageFigure from '../components/PageFigure'
 
 export default function HomePage() {
   const { items, outfits } = useCloset()
 
   return (
     <section className="home">
-      <PageFigure name="home" />
       <div className="home-intro">
         <ScatteredPieces layout="home" />
         <h1>DIGI CLOSET</h1>
