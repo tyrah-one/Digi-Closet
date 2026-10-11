@@ -226,7 +226,7 @@ button.danger:hover:not(:disabled) {
 .home-links {
   display: grid;
   grid-template-columns: repeat(auto-fit, minmax(200px, 1fr));
-  margin-top: 48px;
+  margin-top: 110px; /* room for the scattered pieces above */
   border-top: 1px solid var(--line);
   border-left: 1px solid var(--line);
 }
@@ -265,7 +265,7 @@ button.danger:hover:not(:disabled) {
   align-items: center;
   justify-content: space-between;
   gap: 16px;
-  min-height: 100px; /* room for the scattered pieces */
+  min-height: 150px; /* room for the scattered pieces */
   margin-bottom: 24px;
 }
 
@@ -292,24 +292,24 @@ button.danger:hover:not(:disabled) {
 
 /* On sub pages: pieces sit between the title and the buttons */
 .scatter-page .spot-1 {
-  --size: 80px;
+  --size: 120px;
   --tilt: -10deg;
-  left: 44%;
-  top: 10px;
+  left: 38%;
+  top: 6px;
 }
 
 .scatter-page .spot-2 {
-  --size: 56px;
+  --size: 88px;
   --tilt: 14deg;
-  left: 57%;
+  left: 54%;
   top: 0;
 }
 
 .scatter-page .spot-3 {
-  --size: 70px;
+  --size: 105px;
   --tilt: -4deg;
-  left: 68%;
-  top: 22px;
+  left: 65%;
+  top: 34px;
 }
 
 /* On the home page: pieces sit on both sides of the tagline.
@@ -323,39 +323,48 @@ button.danger:hover:not(:disabled) {
 }
 
 .scatter-home .spot-1 {
-  --size: clamp(76px, 8.5vw, 110px); /* grows with the screen */
+  --size: clamp(110px, 12.5vw, 165px); /* grows with the screen */
   --tilt: -12deg;
-  left: 7vw;
-  bottom: -32px;
+  left: 5vw;
+  bottom: -90px;
 }
 
 .scatter-home .spot-2 {
-  --size: clamp(80px, 9vw, 120px);
+  --size: clamp(120px, 13.5vw, 180px);
   --tilt: 9deg;
-  right: 7vw;
-  bottom: -34px;
+  right: 5vw;
+  bottom: -96px;
 }
 
 .scatter-home .spot-3 {
-  --size: 64px;
+  --size: 96px;
   --tilt: 16deg;
-  left: 24vw;
-  bottom: -32px;
+  left: 23vw;
+  bottom: -84px;
 }
 
 .scatter-home .spot-4 {
-  --size: 70px;
+  --size: 104px;
   --tilt: -14deg;
-  right: 23vw;
-  bottom: -36px;
+  right: 22vw;
+  bottom: -88px;
 }
 
 /* Medium screens: fewer pieces so they don't bump into the text */
-@media (max-width: 900px) {
+@media (max-width: 1000px) {
   .scatter-home .spot-3,
   .scatter-home .spot-4,
   .scatter-page .spot-3 {
     display: none;
+  }
+
+  /* Move the remaining pieces right, clear of longer titles */
+  .scatter-page .spot-1 {
+    left: 47%;
+  }
+
+  .scatter-page .spot-2 {
+    left: 64%;
   }
 }
 
@@ -367,6 +376,10 @@ button.danger:hover:not(:disabled) {
 
   .page-header {
     min-height: 0;
+  }
+
+  .home-links {
+    margin-top: 48px;
   }
 }
 
@@ -640,6 +653,13 @@ button.danger:hover:not(:disabled) {
   display: flex;
   flex-direction: column;
   gap: 8px;
+  padding: 12px;
+  border: 1px solid var(--ink); /* outline box around each outfit */
+}
+
+/* Saved outfits sit straight on the page colour (no beige board) */
+.outfit-card .collage {
+  background: transparent;
 }
 
 .outfit-card > .muted {
