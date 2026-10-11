@@ -104,23 +104,15 @@
           "Your choices are the charger decision and your answers to each friend's questions, and they lead to three endings: you get caught, Jess gets framed, or Leila gets framed.",
           { heading: "Characters and media" },
           "I drew every character myself, plus Jose's body (based on Peter Griffin), the murder weapon (a charger cord with a smiley-face sticker) and a plain bird icon for you, the player. The bird was inspired by Oyasumi Punpun, where a simple design helps you self-insert into the character. I also redrew the characters with open mouths for their dialogue, so the scenes don't feel static.",
-          { heading: "The drafts" },
-          "I tested a rough prompt in Figma Make first, then used ChatGPT to clean it up so it met Figma's guidelines. Draft 1, \"The Last Charge\", had an atmosphere I loved, but the characters were generic shapes. In Draft 2 I added my own drawings, but the dark interface clashed with the white sketches and the text was hard to read. Draft 3 made the images larger and pushed the characters to the side of the screen, a placement I kept for the final design.",
           { heading: "The final design" },
-          "The final version went through over 30 iterations, which I sorted into design, content and nitpicks. I added red borders down the sides for an ominous, mysterious feel, full-body characters beside the dialogue, labels like \"Leila says:\", and a recap of the choices that led to your ending. I also moved the discovery of the body to the beginning and split the interrogation into separate pages instead of one long scroll.",
-          "When the choices and endings got confusing, I drew a flowchart of which choice leads to which ending and wrote my prompts from it.",
+          "Red borders run down the sides of the pages for an ominous, mysterious feel. Full-body drawings of each character sit beside their dialogue, with labels like \"Leila says:\", and a vignette darkens the edges of the discovery scene. Each friend is questioned on their own page, and every ending recaps the choices that led you there.",
           { heading: "Reflection" },
           "This was my first time using Figma. Because I'd already learned to work hand-in-hand with code and AI, getting an LLM to build the pages was easy to adapt to, and I'm relieved I got to share a murder mystery game with my own artwork and characters. The biggest lesson was planning: skipping it led to an excessive amount of prompting and confusion. If I did it again, simplicity would be the focus. I'd also like to add stylistic dialogue and slang for the characters, and effects to make the game less static.",
         ],
         gallery: [
-          { src: "images/murderer-storyboard.jpg", caption: "Planning: the brief, my storyboard and the three endings" },
-          { src: "images/murderer-characters.jpg", caption: "Character designs: Jess, Leila and Matthew, with the charger and early choices" },
-          { src: "images/murderer-draft-2.jpg", caption: "Draft 2: my drawings in Figma Make's first design" },
-          { src: "images/murderer-draft-3.jpg", caption: "Draft 3: larger images, with the characters pushed to the side" },
-          { src: "images/murderer-discovery.jpg", caption: "Final: the discovery of Jose at 7:34 PM, with a vignette" },
-          { src: "images/murderer-leila.jpg", caption: "Final: questioning Leila" },
-          { src: "images/murderer-ending.jpg", caption: "Final: one of the three endings" },
-          { src: "images/murderer-flowchart.jpg", caption: "The flowchart I drew to untangle which choices lead to which ending" },
+          { src: "images/murderer-discovery.jpg", caption: "The discovery of Jose at 7:34 PM, with a vignette" },
+          { src: "images/murderer-leila.jpg", caption: "Questioning Leila" },
+          { src: "images/murderer-ending.jpg", caption: "One of the three endings" },
         ],
         links: [
           { label: "Play the game", url: "https://www.figma.com/make/IhyaQb1YIngoyThrbfrpgG/Multi-page-Interactive-Web-Game?t=2T6Ns96LyIiAAYzu-20&fullscreen=1" },
@@ -503,6 +495,9 @@
     }
 
     .gallery figure { margin: 0; }
+
+    /* With an odd number of pictures, the first one spans the full width so none sits alone */
+    .gallery figure:first-child:nth-last-child(odd) { grid-column: 1 / -1; }
 
     /* Gallery pictures are shown whole, at their own shape */
     .gallery .frame:not(.empty) { aspect-ratio: auto; }
